@@ -1,2 +1,2 @@
-# adaptika
-Repository for my work at Tech Adaptika
+# Tech-Adaptika
+Repository for my 2022 summer internship at Tech Adaptika!
