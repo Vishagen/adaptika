@@ -1,0 +1,73 @@
+#modal-background {
+  position: fixed;
+  left: 0px; top: 0px;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 200; cursor: var(--defaultByPointer);
+}
+
+#modal {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 201;
+  max-height: calc(100% - 48px);
+}
+
+#modalAnimationContainer {
+  background-color: #fff;
+  box-shadow: 0px 1px 14px -3px rgba(0,0,0,0.32);
+  padding: 24px; border-radius: 12px;
+  min-width: 300px; height: 100%;
+}
+
+.ModalCancel {
+  position: absolute;
+  top: 12px; right: 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+.modalAnimationIn {
+  animation: modalOpenKeyframes 0.20s;
+  animation-timing-function:ease-out;
+  opacity: 1;
+}
+
+.modalAnimationOut {
+  animation: modalCloseKeyframes 0.25s;
+  animation-timing-function:ease-out;
+  opacity: 0;
+}
+
+@keyframes modalOpenKeyframes {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes modalCloseKeyframes {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+
+#modalContent {
+  position: relative;
+}

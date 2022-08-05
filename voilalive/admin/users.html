@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users | Admin Panel</title>
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/helpers.css">
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+  <div id="modal-background" onclick="closeModal()" class="hidden animated faster"></div>
+  <div id="modal" class="hidden">
+    <div id="modalAnimationContainer">
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div id="modalContent_editProperty" class="hidden">
+    <h3 id="editPropertyTitle"></h3>
+    <p id="editPropertyDescription">Enter the new email:</p>
+    <div class="form">
+      <input id="editPropertyInput" autocomplete="off" class="input" type="text" name="username" placeholder="Updated Property">
+    </div>
+    <br>
+    <center>
+      <button class="btn modalButtonClose closeModalButtonOnclick">Cancel</button>
+      <button class="btn modalButtonFinish" id="editPropertyFinish">Edit</button>
+    </center>
+  </div>
+  
+  <header>
+    <div class="logo">
+      <img src="../assets/logo_V_small.png" alt="">
+      <p>Admin Panel</p>
+    </div>
+    <div class="nav">
+      <div>
+        <a href="./users.html" class="active">Users</a>
+        <a href="./roles.html">Roles</a>
+        <a href="./audit.html">Audit Logs</a>
+      </div>
+      <div>
+        <a href="./usercheck.html">Sign Out (Ella Reef)</a>
+      </div>
+    </div>
+  </header>
+  
+  <div class="content">
+    <div class="usersBar">
+      <h1>Users</h1>
+      <a href="./import.html" class="btn addUsersButton">
+        <i class="bx bx-plus"></i>
+        Import Users
+      </a>
+    </div>
+    <p>Enter the username or email address of the user you would like to check:</p>
+
+    <div class="form">
+      <input id="userCheckInput" autocomplete="off" class="input" type="text" name="username" placeholder="Username / Email">
+      <input onclick="loadUser()" class="btn" type="submit" value="Check">
+    </div>
+
+    <div id="results" class="hidden">
+      <h2>Results</h2>
+
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td>Username</td>
+          <td id="usernameField">A</td>
+        </tr>
+        <tr>
+          <td>Server ID</td>
+          <td>
+            <select onchange="editedServerID()" name="" id="serverIDDropdown">
+              <option value="LIVEDEMO">LIVEDEMO</option>
+              <option value="Freemium">Freemium</option>
+              <option value="OHH">OHH</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td>Unknown</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td class="editable">
+            <span id="emailField">testtest@gmail.com</span>
+            <button class="btn editButton" onclick="editEmail()">
+              <i class="bx bx-pencil"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Display Name</td>
+          <td class="editable">
+            <span id="displayNameField">qqqqq</span>
+            <button class="btn editButton" onclick="editDisplayName()">
+              <i class="bx bx-pencil"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>First Name</td>
+          <td class="editable">
+            <span id="firstNameField">Ella</span>
+            <button class="btn editButton" onclick="editFirstName()">
+              <i class="bx bx-pencil"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Last Name</td>
+          <td class="editable">
+            <span id="lastNameField">Reef</span>
+            <button class="btn editButton" onclick="editLastName()">
+              <i class="bx bx-pencil"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Role</td>
+          <td>
+            <select onchange="editedRole()" name="" id="roleDropdown">
+              <option value="LiveStudent">LiveStudent</option>
+              <option value="LiveAdmin">LiveAdmin</option>
+              <option value="">Etc</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Verified</td>
+          <td>
+            <select onchange="editedVerified()" name="" id="verifiedDropdown">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Admin</td>
+          <td>
+            <select onchange="editedAdmin()" name="" id="adminDropdown">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- JQuery --> <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="../js/helpers.js"></script>
+  <script src="../js/users.js"></script>
+
+</body>
+</html>

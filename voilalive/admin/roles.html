@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roles | Admin Panel</title>
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/helpers.css">
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>  
+  <div id="modal-background" onclick="closeModal()" class="hidden animated faster"></div>
+  <div id="modal" class="hidden">
+    <div id="modalAnimationContainer">
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div id="modalContent_addRole" class="hidden">
+    <h3>Add Role</h3>
+    <p>Enter the role name:</p>
+    <div class="form">
+      <input id="addRoleName" autocomplete="off" class="input" type="text" name="username" placeholder="Role Name">
+
+      <textarea name="" placeholder="Role Description" id="addRoleDescription" cols="30" rows="5"></textarea>
+
+    </div>
+    <br>
+    <center>
+      <button class="btn modalButtonClose closeModalButtonOnclick">Cancel</button>
+      <button class="btn modalButtonFinish" id="addRoleButton">Save</button>
+    </center>
+  </div>
+
+  <header>
+    <div class="logo">
+      <img src="../assets/logo_V_small.png" alt="">
+      <p>Admin Panel</p>
+    </div>
+    <div class="nav">
+      <div>
+        <a href="./users.html">Users</a>
+        <a href="./roles.html" class="active">Roles</a>
+        <a href="./audit.html">Audit Logs</a>
+      </div>
+      <div>
+        <a href="./usercheck.html">Sign Out (Ella Reef)</a>
+      </div>
+    </div>
+  </header>
+  
+  <div class="content">
+    <h1>Roles</h1>
+    <p>Select a role from the dropdown below to manage it.</p>
+
+    <div id="roleControls">
+      <select onchange="selectRole()" name="" id="rolesDropdown">
+        <option value="-">Select:</option>
+        <option value="LIVEDEMO">LIVEDEMO</option>
+        <option value="Freemium">Freemium</option>
+        <option value="OHH">OHH</option>
+        <option value="--newrole--">-- New Role --</option>
+      </select>
+      <button onclick="deleteRole()" class="btn addRoleButton removeButton">
+        <i class="bx bx-trash"></i>
+      </button>
+    </div>
+
+    <div id="results" class="hidden">
+      <h2>Manage Permissions</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>Permission Name</td>
+          <td>Permission Description</td>
+          <td class="deletePermissionTd">
+            <button class="btn editButton removeButton" onclick="">
+              <i class="bx bx-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <h2>Add Permission</h2>
+      <p>Select a permission and select the plus button to add it to this role.</p>
+      <div id="roleControls">
+        <select name="" id="permissionsDropdown">
+          <option value="-">Select:</option>
+          <option value="CanMute">CanMute</option>
+          <option value="CanLockWhiteboards">CanLockWhiteboards</option>
+          <option value="CanSendWorldMessage">CanSendWorldMessage</option>
+        </select>
+        <button onclick="confirmAddPermission()" class="btn addRoleButton">
+          <i class="bx bx-plus"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JQuery --> <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="../js/helpers.js"></script>
+  <script src="../js/roles.js"></script>
+
+</body>
+</html>
