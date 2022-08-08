@@ -3,10 +3,10 @@ function selectRole() {
 
   if (role == '--newrole--') {
     addRole();
+    $('#rolesDropdown').val('-');
     return;
   }
 
-  console.log("Selected")
   $(`#results`).removeClass("hidden");
 }
 
