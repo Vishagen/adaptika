@@ -273,6 +273,7 @@ textarea {
   border: 1px solid #e6e6e6;
   font-family: inherit;
   padding: 16px;
+  outline: none;
   transition: all 0.2s;
 }
 
@@ -342,4 +343,8 @@ h2 {
   padding-left: 24px;
   padding-right: 24px;
   white-space: nowrap;
+}
+
+.modalButtons {
+  text-align: right;
 }
