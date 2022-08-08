@@ -87,7 +87,7 @@ header .nav a.active {
 }
 
 .content {
-  width: min(600px, calc(100% - 48px));
+  width: min(600px, calc(100% - 0px));
   margin: 0 auto;
   padding-bottom: 48px;
 }
