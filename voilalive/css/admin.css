@@ -46,8 +46,8 @@ header .logo {
 }
 
 header .logo img {
-  width: 42px;
   height: 42px;
+  object-fit: cover;
   padding-right: 12px;
 }
 
