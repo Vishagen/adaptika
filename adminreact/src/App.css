@@ -1,0 +1,372 @@
+body {
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #f1f5f9;
+  padding: 96px 24px 0px 24px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100% - 32px);
+  height: 48px;
+  background-color: #fff;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+  header .nav button {
+    display: block;
+    white-space: nowrap;
+  }
+
+  header .nav {
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+
+  header .logo {
+    padding-right: 12px;
+  }
+}
+
+.nomargin {
+  margin-left: 0px !important;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  border-right: 2px solid #e6e6e6;
+}
+
+header .logo img {
+  height: 42px;
+  object-fit: cover;
+  padding-right: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+header .logo img:hover {
+  opacity: 0.8;
+}
+
+header .logo p {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-right: 8px;
+}
+
+header .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 8px;
+}
+
+header .nav button {
+  font-size: 14px;
+  font-weight: 600;
+  color: #384457;
+  text-decoration: none;
+  margin-left: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+header .nav button:hover {
+  color: #0070f3;
+}
+
+header .nav button.active {
+  color: black;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.content {
+  width: min(600px, calc(100% - 0px));
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.content h1, .content p {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.form .input {
+  width: calc(100% - 34px);
+  margin: 8px 0px;
+  padding: 0 16px;
+  height: 48px;
+  border-radius: 6px;
+  border: 1px solid #e6e6e6;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 48px;
+  color: #495057;
+  outline: none;
+  background-color: white;
+  transition: all 0.2s;
+}
+
+.form .input:hover {
+  border-color: #c3c6c8;
+}
+
+.form .input:focus {
+  border-color: #0070f3;
+}
+
+.btn {
+  width: 100%;
+  height: 38px;
+  border-radius: 6px;
+  border: 1px solid #e6e6e6;
+  background-color: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn.disabled {
+  background-color: grey;
+  pointer-events: none;
+}
+
+.btn:hover {
+  background-color: #0070f3;
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+table {
+  border-collapse:separate;
+  border:solid #e6e6e6 1px;
+  background-color: white;
+  border-radius:8px;
+  width: 100%;
+}
+
+td, th {
+  text-align: left;
+  padding: 12px;
+}
+
+th {
+  border-top: none;
+}
+
+td:first-child, th:first-child {
+   border-left: none;
+}
+
+select {
+  padding: 8px 32px 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e6e6e6;
+  font-family: inherit;
+  font-weight: 400;
+  color: #495057;
+  outline: none;
+  background-color: white;
+  position: relative;
+
+  background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat;
+  background-position: right 5px top; /* Change the px value here to change the distance */
+  -moz-appearance: none; 
+  -webkit-appearance: none; 
+  appearance: none;
+  transition: all 0.2s;
+}
+
+select:focus {
+  border-color: #0070f3;
+}
+
+td.editable {
+  padding-left: 6px;
+}
+
+td.editable input {
+  border: none;
+  font-size: 16px;
+  padding: 4px 6px;
+  width: calc(100% - 48px);
+}
+
+.editButton {
+  height: 32px; width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  border-radius: 6px;
+  border: none;
+  background-color: #65686a;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.editButton:hover {
+  background-color: #474a4b;
+  cursor: pointer;
+}
+
+.modalButtonClose {
+  padding: 0px 24px;
+  width: min-content;
+  border: none;
+  background-color: #dce4ea;
+  color: black;
+  margin-right: 8px;
+}
+
+.modalButtonClose:hover {
+  background-color: #cbd4dc;
+  cursor: pointer;
+}
+
+.modalButtonFinish {
+  margin-left: 8px;
+  padding: 0px 24px;
+  width: min-content;
+  border: none;
+}
+
+#modalContent h3 {
+  margin-top: 0px;
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+
+#modalContent p {
+  margin-top: 8px;
+}
+
+#rolesDropdown, #permissionsDropdown {
+  width: calc(100% - 56px);
+  height: 38px;
+  background-color: white;
+}
+
+#roleControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.addRoleButton {
+  padding: 18px 12px 18px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0px; height: 0px;
+  width: min-content;
+  border: none;
+  margin-right: 8px;
+}
+
+textarea {
+  width: calc(100% - 34px);
+  border-radius: 6px;
+  border: 1px solid #e6e6e6;
+  font-family: inherit;
+  padding: 16px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+textarea:hover {
+  border-color: #c3c6c8;
+}
+
+textarea:focus {
+  border-color: #0070f3;
+}
+
+.deletePermissionTd {
+  text-align: center;
+}
+
+.deletePermissionTd button {
+  position: relative;
+  display: inline-block;
+}
+
+h2 {
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+.removeButton {
+  background-color: red;
+}
+
+.removeButton:hover {
+  background-color: #d60000;
+}
+
+.usersBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addUsersButton {
+  padding: 18px 18px 18px 14px;
+  width: min-content;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 0px;
+  text-decoration: none;
+  border: none;
+  white-space: nowrap;
+}
+
+.addUsersButton i {
+  margin-right: 12px;
+}
+
+.csvDropdowns {
+  background-color: white ;
+}
+
+.dropzone.dz-clickable {
+  border-radius: 8px;
+}
+
+.importButton {
+  width: min-content;
+  padding-left: 24px;
+  padding-right: 24px;
+  white-space: nowrap;
+}
+
+.modalButtons {
+  text-align: right;
+}
+
+.hidden {
+  display: none;
+}
