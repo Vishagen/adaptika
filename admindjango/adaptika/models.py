@@ -8,7 +8,7 @@ class Permission(models.Model):
 
 class Role(models.Model):
     name = models.CharField(max_length=100)
-    permissions = models.ManyToManyField(Permission, )
+    permissions = models.ManyToManyField(Permission, related_name='permissions')
 
 
 class User(models.Model):
