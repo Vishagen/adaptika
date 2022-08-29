@@ -18,21 +18,15 @@ function Roles(props) {
   const [roleLoaded, setRoleLoaded] = useState(false);
   
   function saveRole() {
-    console.log(role.name)
-    console.log({
-      name: role.name,
-      permissions: permissions
-    })
-
     fetch(`http://127.0.0.1:8000/adaptika/roles/${role.name}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: {
+      body: JSON.stringify({
         name: role.name,
-        permissions: permissions
-      }
+        permissions: JSON.stringify(permissions)
+      })
     }).then((response) => {
       console.log(response)
       setEdited(false);
@@ -45,13 +39,14 @@ function Roles(props) {
       // Prompt for name
       const newRole = prompt("Enter new role name");
       // Add role to datbabse and then props.updateroles
-      const response = await fetch('http://127.0.0.1:8000/adaptika/rolelist', {
+      await fetch('http://127.0.0.1:8000/adaptika/rolelist', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: newRole
+          name: newRole,
+          permissions: `[]`
         })
       });
       
@@ -59,7 +54,7 @@ function Roles(props) {
 
       setRole({
         name: newRole,
-        permissions: []
+        permissions: `[]`
       });
 
       setEdited(false);
@@ -71,7 +66,8 @@ function Roles(props) {
       setRole(role);
       setEdited(false);
       setRoleLoaded(true);
-      setPermissions(role.permissions);
+      console.log(role)
+      setPermissions((typeof(role.permissions) === 'object' || role.permissions === '') ? [] : JSON.parse(role.permissions));
     }
     else {
       return;

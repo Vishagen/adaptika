@@ -45,6 +45,8 @@ function Users(props) {
   }
 
   function editProperty(key, value) {
+    console.log(value)
+
     setUserData({
       ...userData,
       [key]: value,
@@ -54,9 +56,6 @@ function Users(props) {
   }
 
   function saveUser() {
-
-    // Make fetch put
-
     fetch(`http://127.0.0.1:8000/adaptika/users/${user}`, {
       method: 'PUT',
       headers: {

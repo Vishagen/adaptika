@@ -4,7 +4,7 @@ function Header(props) {
   return (
     <header className='header'>
       <div className='logo'>
-        <img alt="" src={logo} />
+        <img onClick={() => {window.location.reload()}} alt="" src={logo} />
         <p>Admin Panel</p>
       </div>
       <div className="nav">

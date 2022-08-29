@@ -8,7 +8,7 @@ class Permission(models.Model):
 
 class Role(models.Model):
     name = models.CharField(max_length=100)
-    permissions = models.ManyToManyField(Permission, related_name='permissions')
+    permissions = models.TextField(default='')
 
 
 class User(models.Model):
@@ -19,6 +19,6 @@ class User(models.Model):
     displayName = models.CharField(max_length=100)
     firstName = models.CharField(max_length=100)
     lastName = models.CharField(max_length=100)
-    role = models.ForeignKey(Role, on_delete=models.CASCADE)
+    role = models.CharField(max_length=100)
     verified = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)

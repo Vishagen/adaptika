@@ -23,7 +23,7 @@ class UserDetails(generics.RetrieveUpdateAPIView):
 class RoleList(generics.ListCreateAPIView):
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
-    
+
 
 class PermissionList(generics.ListCreateAPIView):
     queryset = Permission.objects.all()
