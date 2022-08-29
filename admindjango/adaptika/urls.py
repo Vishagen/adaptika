@@ -7,4 +7,7 @@ urlpatterns = [
     # Users/(username)
     path('users/<str:username>', views.UserDetails.as_view(), name='user-details'),
     path('roles/<str:name>', views.RoleDetails.as_view(), name='role-details'),
+    path('rolelist', views.RoleList.as_view(), name='role-list'),
+    path('permissionlist', views.PermissionList.as_view(), name='role-list'),
+
 ]

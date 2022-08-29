@@ -2,12 +2,6 @@ from rest_framework import serializers
 from .models import Permission, Role, User
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('username', 'serverID', 'email', 'displayName', 'firstName', 'lastName', 'role', 'verified', 'admin')
-
-
 class PermissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Permission
@@ -22,3 +16,11 @@ class RoleSerializer(serializers.ModelSerializer):
         depth = 2
         model = Role
         fields = ('name', 'permissions')
+
+
+class UserSerializer(serializers.ModelSerializer):
+    role = RoleSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'serverID', 'email', 'displayName', 'firstName', 'lastName', 'role', 'verified', 'admin')

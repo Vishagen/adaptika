@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 function Users(props) {
-
   const [user, setUser] = useState("");
   const [edited, setEdited] = useState(false);
   const [userData, setUserData] = useState({
@@ -30,17 +29,19 @@ function Users(props) {
     //   admin: "false",
     // });
 
-    const data = localStorage.getItem(`user:${user}`);
-    if (data) {
-      setUserData(JSON.parse(data));
-    }
-    else {
-      alert("No user.")
-      return;
-    }
+    // Make fetch
+    fetch(`http://127.0.0.1:8000/adaptika/users/${user}`).then(async (response) => {
 
-    setUserLoaded(true);
-    setEdited(false);
+      if (response.status === 200) {
+        const data = await response.json();
+        setUserData(data);
+        setUserLoaded(true);
+        setEdited(false);
+      } else {
+        alert("No user.")
+        setUserLoaded();
+      }
+    })
   }
 
   function editProperty(key, value) {
@@ -53,8 +54,20 @@ function Users(props) {
   }
 
   function saveUser() {
-    localStorage.setItem(`user:${user}`, JSON.stringify(userData));
-    setEdited(false);
+
+    // Make fetch put
+
+    fetch(`http://127.0.0.1:8000/adaptika/users/${user}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    }).then((response) => {
+      console.log(response)
+      setEdited(false);
+    })
+
   }
 
   return (
@@ -66,7 +79,7 @@ function Users(props) {
           Import Users
         </button>
       </div>
-      <p>Enter the username or email address of the user you would like to check: {user}</p>
+      <p>Enter the username or email address of the user you would like to check:</p>
   
       <div className="form">
         <input onKeyUp={(event) => {
@@ -135,9 +148,12 @@ function Users(props) {
               <td>Role</td>
               <td>
                 <select onChange={(event) => editProperty("role", event.target.value)} value={userData.role} name="" id="roleDropdown">
-                  <option value="LiveStudent">LiveStudent</option>
-                  <option value="LiveAdmin">LiveAdmin</option>
-                  <option value="">Etc</option>
+                  {
+                    props.roleList.map((role) => {
+                      return <option key={role.name} value={role.name}>{role.name}</option>
+                    }
+                    )
+                  }
                 </select>
               </td>
             </tr>

@@ -1,66 +1,86 @@
 import { useState, useEffect } from 'react';
 
-function Roles() {
-  const permissionData = {
-    "canMute": "Allows the user to mute",
-    "canLockWhiteboards": "Allows the user to lock whiteboards",
-    "canSendWorldMessage": "Allows the user to send world messages",
-  } 
+function Roles(props) {
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/adaptika/permissionlist').then(async (response) => {
+      const data = await response.json();
+      setPermissionList(data);
+      console.log(data)
+    })
+  }, [])
 
   const [role, setRole] = useState("");
-  const [roles, setRoles] = useState([]);
+  const [permissionList, setPermissionList] = useState([]);
   const [permissions, setPermissions] = useState([]);
   const [permission, setPermission] = useState("");
   const [edited, setEdited] = useState(false);
   const [roleLoaded, setRoleLoaded] = useState(false);
-
-  // Constructor
-  useEffect(() => {
-    if (localStorage.getItem('roles')) {
-      setRoles(JSON.parse(localStorage.getItem('roles')));
-    }
-    else {
-      setRoles([]);
-    }
-  }, []);
   
   function saveRole() {
-    localStorage.setItem(`role:${role}`, JSON.stringify(permissions));
-    setEdited(false);
+    console.log(role.name)
+    console.log({
+      name: role.name,
+      permissions: permissions
+    })
+
+    fetch(`http://127.0.0.1:8000/adaptika/roles/${role.name}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: {
+        name: role.name,
+        permissions: permissions
+      }
+    }).then((response) => {
+      console.log(response)
+      setEdited(false);
+    })
   }
 
-  function selectRole(role) {
-    console.log(role);
-    if (role === "--newrole--") {
+  async function selectRole(roleInput) {
+    let role;
+    if (roleInput === "--newrole--") {
       // Prompt for name
       const newRole = prompt("Enter new role name");
-      setRoles([...roles, newRole]);
-      localStorage.setItem('roles', JSON.stringify(roles));
+      // Add role to datbabse and then props.updateroles
+      const response = await fetch('http://127.0.0.1:8000/adaptika/rolelist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: newRole
+        })
+      });
+      
+      props.updateRoles()
 
-      setRole(newRole);
+      setRole({
+        name: newRole,
+        permissions: []
+      });
+
       setEdited(false);
       setRoleLoaded(true);
+      setPermissions([]);
     }
     else if (role !== "-") {
+      role = JSON.parse(roleInput)
       setRole(role);
       setEdited(false);
       setRoleLoaded(true);
+      setPermissions(role.permissions);
     }
     else {
       return;
     }
-
-    const data = localStorage.getItem(`role:${role}`);
-    if (data) {
-      setPermissions(JSON.parse(data));
-    }
-    else {
-      setPermissions([]);
-    }
   }
 
   function addPermission() {
-    setPermissions([...permissions, permission]);
+    console.log(permission)
+    setPermissions([...permissions, JSON.parse(permission)]);
     setEdited(true);
   }
 
@@ -72,14 +92,14 @@ function Roles() {
   return (
     <div>
       <h1>Roles</h1>
-      <p>Select a role from the dropdown below to manage it {role}.</p>
+      <p>Select a role from the dropdown below to manage it.</p>
   
       <div id="roleControls">
-        <select onChange={(event) => {selectRole(event.target.value)}} value={role} id="rolesDropdown">
+        <select onChange={(event) => {selectRole(event.target.value)}} value={JSON.stringify(role)} id="rolesDropdown">
           <option value="-">Select:</option>
 
-          {roles.map((role, index) => {
-            return <option key={index} value={role}>{role}</option>
+          {props.roleList.map((role, index) => {
+            return <option key={role.name} value={JSON.stringify(role)}>{role.name}</option>
           })}
 
           <option value="--newrole--">-- New Role --</option>
@@ -101,8 +121,8 @@ function Roles() {
             {
               permissions.length ? permissions.map((permission, index) => {
                 return <tr key={index}>
-                  <td>{permission}</td>
-                  <td>{permissionData[permission]}</td>
+                  <td>{permission.name}</td>
+                  <td>{permission.description}</td>
                   <td><button onClick={() => {removePermission(permission)}} className="btn removeButton">
                     <i className="bx bx-trash"></i>
                   </button></td>
@@ -113,13 +133,13 @@ function Roles() {
         </table>
         <br />
         <h2>Add Permission</h2>
-        <p>Select a permission and select the plus button to add it to this role {permission}.</p>
+        <p>Select a permission and select the plus button to add it to this role.</p>
         <div id="roleControls">
         <select onChange={(event) => setPermission(event.target.value)} value={permission} id="permissionsDropdown">
             <option value="-">Select:</option>
             {
-              Object.keys(permissionData).filter(p => !permissions.includes(p)).map((permission, index) => {
-                return <option key={index} value={permission}>{permission}</option>
+              permissionList.filter(p => {return !permissions.some((el) => {return el.name === p.name})}).map((pname, index) => {
+                return <option key={pname.name} value={JSON.stringify(pname)}>{pname.name}</option>
               })
             }
           </select>

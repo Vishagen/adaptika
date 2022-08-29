@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Users from './Users';
 import Roles from './Roles';
@@ -8,6 +8,18 @@ import Import from './Import';
 
 function App() {
   const [activeTab, setActiveTab] = useState('users');
+  const [roleList, setRoleList] = useState([]);
+
+  useEffect(() => {
+    updateRoles();
+  }, [])
+
+  function updateRoles() {
+    fetch('http://127.0.0.1:8000/adaptika/rolelist').then(async (response) => {
+      const data = await response.json();
+      setRoleList(data);
+    })
+  }
 
   function handleTabClick(tab) {
     setActiveTab(tab);
@@ -17,8 +29,8 @@ function App() {
     <div className="App">
       <Header activeTab={activeTab} handleTabClick={handleTabClick}  />
       <div className='content'>
-        {activeTab === 'users' ? <Users handleTabClick={handleTabClick} /> : null}
-        {activeTab === 'roles' ? <Roles /> : null}
+        {activeTab === 'users' ? <Users roleList={roleList} handleTabClick={handleTabClick} /> : null}
+        {activeTab === 'roles' ? <Roles updateRoles={updateRoles} roleList={roleList} /> : null}
         {activeTab === 'audit' ? <Audit /> : null}
         {activeTab === 'import' ? <Import /> : null}
       </div>
