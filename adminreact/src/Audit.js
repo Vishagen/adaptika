@@ -1,4 +1,21 @@
+import { useEffect, useState } from "react";
+import TimeAgo from 'react-timeago'
+
 function Audit() {
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/adaptika/actionloglist`).then(async (response) => {
+      const data = await response.json();
+      setAuditLogs(data.reverse());
+    })
+  }, [])
+
+  const [auditLogs, setAuditLogs] = useState([])
+
+  function loadMoreLogs() {
+    
+  }
+
   return (
     <div>
       <h1>Audit Logs</h1>
@@ -6,19 +23,28 @@ function Audit() {
       <table>
         <tbody>
           <tr>
-            <th>Admin</th>
+            <th>Username</th>
             <th>Date</th>
             <th>Action</th>
           </tr>
-          <tr>
-            <td>A</td>
-            <td>2020-11-02 15:45:11</td>
-            <td>
-              Updated the server ID of TEST@EMAIL.COM to 11 (OHH Campus)
-            </td>
-          </tr>
+          {
+            auditLogs.map((auditLog, index) => {
+              return (
+                <tr key={index}>
+                  <td>{auditLog.username}</td>
+                  <td title="">
+                    <TimeAgo date={new Date(auditLog.date_time)}></TimeAgo>
+                  </td>
+                  <td>{auditLog.action.substring(0, 1).toUpperCase()}{auditLog.action.substring(1, auditLog.action.length).toLowerCase()}</td>
+                </tr>
+              )
+            })
+          }
         </tbody>
       </table>
+
+      <button onClick={loadMoreLogs()}>Load more</button>
+
     </div>
   );
 }

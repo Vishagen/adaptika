@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Permission, Role, User
+from .models import ActionLog, Permission, Role, User
 
 
 class PermissionSerializer(serializers.ModelSerializer):
@@ -20,3 +20,10 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'serverID', 'email', 'displayName', 'firstName', 'lastName', 'role', 'verified', 'admin')
+
+
+# Pagination serializer
+class ActionLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ActionLog
+        fields = ('action_log_id', 'server_id', 'username', 'date_time', 'action')

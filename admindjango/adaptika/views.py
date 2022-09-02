@@ -1,9 +1,8 @@
 from django.http import HttpResponse
 from rest_framework import generics
 from django.template import loader
-
-from .serializers import PermissionSerializer, UserSerializer, RoleSerializer
-from .models import Permission, User, Role
+from .serializers import ActionLogSerializer, PermissionSerializer, UserSerializer, RoleSerializer
+from .models import ActionLog, Permission, User, Role
 
 
 def index(request):
@@ -35,3 +34,8 @@ class RoleDetails(generics.RetrieveUpdateAPIView):
     serializer_class = RoleSerializer
     lookup_field = 'name'
     lookup_url_kwarg = 'name'
+
+
+class ActionLogList(generics.ListCreateAPIView):
+    queryset = ActionLog.objects.all()
+    serializer_class = ActionLogSerializer

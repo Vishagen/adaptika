@@ -85,6 +85,11 @@ function Roles(props) {
     setEdited(true);
   }
 
+  // function removeRole() {
+  //   // The role is 
+  //   console.log(role)
+  // }
+
   return (
     <div>
       <h1>Roles</h1>
@@ -100,9 +105,9 @@ function Roles(props) {
 
           <option value="--newrole--">-- New Role --</option>
         </select>
-        <button className="btn addRoleButton removeButton">
+        {/* <button onClick={() => removeRole()} className="btn addRoleButton removeButton">
           <i className="bx bx-trash"></i>
-        </button>
+        </button> */}
       </div>
   
       <div id="results2" className={roleLoaded ? '' : 'hidden'}>
